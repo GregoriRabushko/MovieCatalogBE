@@ -18,6 +18,16 @@ export class MovieController {
         }
     }
 
+    async searchMovies(req, res) {
+        try {
+            const { searchValue } = req.query;
+            const movies = await movieService.searchMovies(searchValue);
+            return res.status(200).json(movies);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     async getRecommendations(req, res) {
         try {
             const movies = await movieService.getRecommendations();
@@ -30,7 +40,6 @@ export class MovieController {
     async getMovie(req, res) {
         try {
             const { id } = req.params;
-            console.log(id)
             const movie = await movieService.getMovie(id);
             return res.status(200).json(movie);
         } catch (e) {
@@ -54,7 +63,6 @@ export class MovieController {
     async getVideo(req, res) {
         try {
             const buffer = await fs.promises.readFile(videoPath);
-            console.log('get video')
             res.setHeader('Content-Type', 'video/mp4');
             return res.status(200).send(buffer);
         } catch (e) {

@@ -26,7 +26,7 @@ export class Movie {
         this.genre = movie.genre;
         this.createdAt = movie.createdAt;
         this.id = movie.id;
-        this.countAll = movie.countAll;
+        this.countAll = 100;
         this.countWatched = movie.countWatched;
         this.duration = movie.duration;
     }
